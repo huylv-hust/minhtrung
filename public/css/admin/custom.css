@@ -1,0 +1,17 @@
+table.jambo_table {
+    border: 1px solid rgba(221, 221, 221, 0.78);
+}
+table.jambo_table thead {
+    background: #FF9800;
+    color: #FFFF;
+}
+.label-sts {
+    font-size: 100%;
+    font-weight: normal;
+}
+.custom-label {
+    height: 10px!important;
+}
+table tr td {
+    vertical-align: middle!important;
+}
