@@ -22,3 +22,7 @@ Route::get('/admin/logout', ['uses' => 'Auth\LoginController@logout'])->name('lo
 Route::group(['middleware' => ['auth','web'], 'prefix' => 'admin'], function () {
     Route::get('/dashboard', 'AdminController@dashboard')->name('admin_dashboard');
 });
+Route::get('/admin/permission', ['middleware' => ['web', 'auth'], function() {
+    $title = 'Bạn không có quyền truy cập.';
+    return view('layouts.admin.permission_denied', compact('title'));
+}])->name('insufficient_permission');

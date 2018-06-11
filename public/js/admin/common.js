@@ -14,4 +14,12 @@ $(function() {
         if(value.trim() != '') return true;
         return false;
     },'Không được nhập toàn dấu cách');
+
+    //Datetimepicker plugin
+    $('.datepicker').bootstrapMaterialDatePicker({
+        format: 'DD-MM-YYYY',
+        clearButton: true,
+        weekStart: 1,
+        time: false
+    });
 });

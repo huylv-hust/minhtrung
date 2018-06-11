@@ -15,3 +15,6 @@ table.jambo_table thead {
 table tr td {
     vertical-align: middle!important;
 }
+.m-t--8 {
+    margin-top: 8px;
+}

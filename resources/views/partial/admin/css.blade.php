@@ -33,3 +33,5 @@
 
 <!-- Bootstrap Select Css -->
 <link href="{{ asset('plugins/bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet">
+
+<link href="{{ asset('css/admin/jquery-ui.min.css') }}" rel="stylesheet">

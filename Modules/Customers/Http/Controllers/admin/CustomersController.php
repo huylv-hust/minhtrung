@@ -1,5 +1,6 @@
-<?php namespace Modules\Users\Http\Controllers\Admin;
+<?php namespace Modules\Customers\Http\Controllers\Admin;
 
+use App\Customer;
 use App\Helpers\Constants;
 use App\User;
 use Illuminate\Http\Request;
@@ -8,67 +9,64 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
-class UsersController extends Controller
+class CustomersController extends Controller
 {
     protected function validator(array $data)
     {
         return Validator::make(
             $data,
-            ['email' => 'unique:users',],
-            ['email.unique' => 'Email đã tồn tại.']
+            ['cmt' => 'unique:customers'],
+            ['cmt.unique' => 'Số CMND đã tồn tại.']
         );
     }
 
-    public function index(Request $request, User $user)
+    public function index(Request $request, Customer $customer)
     {
-        $title = 'Danh sách người dùng';
+        $title = 'Danh sách khách hàng';
         $filters = $request->all();
-        $users = $user->getList($filters);
+        $customers = $customer->getList($filters);
         $query_string = empty($filters) ? '' : '?' . http_build_query($filters);
-        $request->session()->put('list_user_url', $request->url() . $query_string);
-        return view('users::admin/index', compact('title', 'filters', 'users'));
+        $request->session()->put('list_customer_url', $request->url() . $query_string);
+        return view('customers::admin/index', compact('title', 'filters', 'customers'));
     }
 
     public function create()
     {
-        $title = 'Tạo mới người dùng';
-        return view('users::admin/register', compact('title'));
+        $title = 'Tạo mới khách hàng';
+        return view('customers::admin/register', compact('title'));
     }
 
     public function store(Request $request)
     {
         $this->validator($request->all())->validate();
         $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        if (User::create($input)) {
+        $input['birthday'] = date('Y-m-d', strtotime($input['birthday']));
+        if (Customer::create($input)) {
             Session::flash('success', Constants::$COMMON_SAVE_OK);
-            return redirect()->route('admin_users_list');
+            return redirect()->route('admin_customers_list');
         }
         Session::flash('error', Constants::$SAVE_FAILED);
-        return redirect()->route('admin_users_list');
+        return redirect()->route('admin_customers_list');
     }
 
     public function edit($id)
     {
-        if (Auth::user()->id == $id || Auth::user()->role == 2) {
-            $user = User::findOrFail($id);
-            $title = 'Sửa thông tin người dùng';
-            return view('users::admin/register', compact('title', 'user'));
-        }
-        return redirect(route('insufficient_permission'));
+        $customer = Customer::findOrFail($id);
+        $title = 'Sửa thông tin người dùng';
+        return view('customers::admin/register', compact('title', 'customer'));
     }
 
     public function update(Request $request, $id)
     {
         $input = $request->all();
-        $user = User::findOrFail($id);
-        $input['password'] = bcrypt($input['password']);
-        if ($user->update($input)) {
+        $customer = Customer::findOrFail($id);
+        $input['birthday'] = date('Y-m-d', strtotime($input['birthday']));
+        if ($customer->update($input)) {
             Session::flash('success', Constants::$COMMON_SAVE_OK);
-            return redirect()->route('admin_users_list');
+            return redirect()->route('admin_customers_list');
         }
         Session::flash('error', Constants::$SAVE_FAILED);
-        return redirect()->route('admin_users_list');
+        return redirect()->route('admin_customers_list');
     }
 
     public function destroy(Request $request)
@@ -93,14 +91,9 @@ class UsersController extends Controller
     public function profile()
     {
         $title = 'Trang cá nhân';
-        return view('users::admin/profile', compact('title'));
+        return view('customers::admin/profile', compact('title'));
     }
 
-    /**
-     * action change status
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function status(Request $request)
     {
         $id = $request->id;
@@ -109,7 +102,7 @@ class UsersController extends Controller
         $message = Constants::$AT_LEAST_1_RECORD;
         if (!empty($id)) {
             $message = Constants::$SAVE_FAILED;
-            if (User::whereIn('id', $id)->update(['status' => $status])) {
+            if (Customer::whereIn('id', $id)->update(['status' => $status])) {
                 $result = 'success';
                 $message = Constants::$COMMON_SAVE_OK;
             }

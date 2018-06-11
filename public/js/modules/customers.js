@@ -1,7 +1,7 @@
-var Users = function () {
+var Customer = function () {
     var search = function () {
         $('#btn_search').on('click', function () {
-            $('#form_user').attr('method', 'GET').attr('action', baseUrl + '/users').submit();
+            $('#form_customer').attr('method', 'GET').attr('action', baseUrl + '/customers').submit();
         });
     };
 
@@ -9,7 +9,7 @@ var Users = function () {
         $('#btn_active').on('click', function () {
             if(confirm('Ban có muốn thay đổi trạng thái?')) {
                 $('input[name = "change_status"]').attr('value', '1');
-                $('#form_user').attr('action', baseUrl + '/users/status').attr('method', 'POST').submit();
+                $('#form_customer').attr('action', baseUrl + '/customers/status').attr('method', 'POST').submit();
             }
         });
     };
@@ -17,25 +17,34 @@ var Users = function () {
         $('#btn_inactive').on('click', function () {
             if(confirm('Ban có muốn thay đổi trạng thái?')) {
                 $('input[name = "change_status"]').attr('value', '0');
-                $('#form_user').attr('action', baseUrl + '/users/status').attr('method', 'POST').submit();
+                $('#form_customer').attr('action', baseUrl + '/customers/status').attr('method', 'POST').submit();
             }
         });
     };
 
     var del = function () {
         $('#btn_delete').on('click', function () {
-            if(confirm('Ban có muốn xóa tài khoản người dùng?'))
-                $('#form_user').attr('action', baseUrl + '/users/delete').attr('method', 'POST').submit();
+            if(confirm('Ban có muốn xóa khách hàng?'))
+                $('#form_customer').attr('action', baseUrl + '/customers/delete').attr('method', 'POST').submit();
         });
     };
 
     var validate = function(){
-        $('#form_create_user').validate({
+        $('#form_create_customer').validate({
             rules: {
                 name: {
                     required: true,
                     check_all_space: true,
                     maxlength: 50
+                },
+                cmt: {
+                    required: true,
+                    check_all_space: true,
+                    maxlength: 50,
+                    number: true
+                },
+                birthday: {
+                    required: true
                 },
                 address: {
                     required: true,
@@ -52,10 +61,6 @@ var Users = function () {
                     required: true,
                     check_all_space: true,
                     maxlength: 100
-                },
-                password: {
-                    required: true,
-                    maxlength: 100
                 }
             },
             messages: {
@@ -63,6 +68,15 @@ var Users = function () {
                     required: 'Hãy nhập họ tên.',
                     check_all_space: 'Hãy nhập họ tên.',
                     maxlength: 'Nhập tối đa 50 kí tự.'
+                },
+                cmt: {
+                    required: 'Hãy nhập số CMND.',
+                    check_all_space: 'Hãy nhập số CMND.',
+                    maxlength: 'Nhập tối đa 50 kí tự.',
+                    number: 'Chỉ nhập số.'
+                },
+                birthday: {
+                    required: 'Hãy nhập năm sinh.'
                 },
                 address: {
                     required: 'Hãy nhập địa chỉ.',
@@ -89,7 +103,7 @@ var Users = function () {
     };
 
     var submit = function(){
-        var form = $('#form_create_user'),
+        var form = $('#form_create_customer'),
             valid;
         form.on('submit', function() {
             valid = form.valid();
@@ -116,5 +130,5 @@ var Users = function () {
 }();
 
 $(function () {
-    Users.init();
+    Customer.init();
 });

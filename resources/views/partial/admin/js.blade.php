@@ -1,6 +1,9 @@
 <!-- Jquery Core Js -->
 <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
 
+<!-- Jquery Validate Js -->
+<script src="{{ asset('plugins/jquery-validation/jquery.validate.js') }}"></script>
+
 <!-- Bootstrap Core Js -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.js') }}"></script>
 
@@ -33,16 +36,19 @@
 <!-- Sparkline Chart Plugin Js -->
 <script src="{{ asset('plugins/jquery-sparkline/jquery.sparkline.js') }}"></script>
 
+<script src="{{ asset('plugins/momentjs/moment.js') }}"></script>
+
+<script src="{{ asset('plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
+
 <!-- Custom Js -->
 <script src="{{ asset('js/admin/custom.js') }}"></script>
 
 <script src="{{ asset('js/admin/admin.js') }}"></script>
+
+<script src="{{ asset('js/admin/jquery-ui.min.js') }}"></script>
 
 <!-- Demo Js -->
 <script src="{{ asset('js/admin/demo.js') }}"></script>
 
 <!-- Common Js -->
 <script src="{{ asset('js/admin/common.js') }}"></script>
-
-<!-- Select2 Js -->
-<script src="{{ asset('plugins/jquery-validation/jquery.validate.js') }}"></script>

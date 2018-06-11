@@ -8,12 +8,12 @@
                 <img src="{{ asset('images/user.png') }}" width="48" height="48" alt="User"/>
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                <div class="email">john.doe@example.com</div>
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}</div>
+                <div class="email">{{ Auth::user()->email }}</div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>Trang cá nhân</a></li>
+                        <li><a href="{{ route('profile') }}"><i class="material-icons">person</i>Trang cá nhân</a></li>
                         <li><a href="{{ route('logout') }}"><i class="material-icons">input</i>Đăng xuất</a></li>
                     </ul>
                 </div>
@@ -23,7 +23,7 @@
         <!-- Menu -->
         <div class="menu">
             <ul class="list">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header">DANH MỤC</li>
                 <li>
                     <a href="{{ route('admin_dashboard') }}">
                         <i class="material-icons">home</i>
@@ -43,6 +43,49 @@
                             <a href="{{ route('admin_users_show_create') }}">Thêm mới người dùng</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a class="menu-toggle">
+                        <i class="material-icons">mood</i>
+                        <span>Khách hàng</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{ route('admin_customers_list') }}">Danh sách khách hàng</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin_customers_show_create') }}">Thêm mới khách hàng</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="material-icons">attach_money</i>
+                        <span>Khoản vay</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="menu-toggle">
+                        <i class="material-icons">insert_chart</i>
+                        <span>Thống kê</span>
+                    </a>
+                    <ul class="ml-menu">
+                        <li>
+                            <a href="{{ route('admin_users_list') }}">Danh sách người dùng</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('admin_users_show_create') }}">Thêm mới người dùng</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="material-icons">settings</i>
+                        <span>Cài đặt</span>
+                    </a>
                 </li>
             </ul>
         </div>

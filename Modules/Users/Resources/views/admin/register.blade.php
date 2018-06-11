@@ -13,7 +13,7 @@
                     </li>
                     <li class="active">
                         <a href="javascript:void(0)">
-                            <i class="material-icons">person_add</i> Tạo mới người dùng
+                            <i class="material-icons">person_add</i>
                         </a>
                     </li>
                 </ol>
