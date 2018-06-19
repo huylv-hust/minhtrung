@@ -156,7 +156,7 @@
                                                     <i class="glyphicon glyphicon-edit"></i> <span>Sửa</span>
                                                 </a>
                                                 <a class="btn bg-purple btn-xs waves-effect"
-                                                   href="{{ route('admin_orders_show_create',array('id'=>$customer->id)) }}">
+                                                   href="{{ route('admin_customers_edit',array('id'=>$customer->id)) }}">
                                                     <i class="glyphicon glyphicon-usd"></i> <span>Vay</span>
                                                 </a>
                                             </td>
