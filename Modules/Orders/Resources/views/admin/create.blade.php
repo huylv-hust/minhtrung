@@ -1,6 +1,6 @@
 @extends('layouts/admin/default')
 @section('content')
-    <script src="{{ asset('js/modules/customers.js') }}"></script>
+    <script src="{{ asset('js/modules/orders.js') }}"></script>
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
@@ -160,7 +160,7 @@
                                 </div>
                                 <!-- Tab loans -->
                                 <div role="tabpanel" class="tab-pane fade" id="loans">
-                                    {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_handle', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
+                                    {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_loans', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
                                     <div class="row clearfix">
                                         @if(Session::has('error'))
                                             <div class="alert alert-danger m-l-15 m-r-15">
@@ -241,7 +241,7 @@
                                 </div>
                                 <!-- Tab installment -->
                                 <div role="tabpanel" class="tab-pane fade" id="installment">
-                                    {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_handle', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
+                                    {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_installment', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
                                     <div class="row clearfix">
                                         @if(Session::has('error'))
                                             <div class="alert alert-danger m-l-15 m-r-15">
@@ -271,13 +271,13 @@
 
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
-                                            <label for="item">Đồ vật</label>
+                                            <label for="item">Khoản vay</label>
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="item" class="form-control" value="{{ isset($order) ? $order->item : old('item') }}" placeholder="Nhập tên đồ vật">
+                                                    <input type="text" name="item" class="form-control" value="{{ isset($order) ? $order->item : old('item') }}" placeholder="Nhập khoản vay">
                                                 </div>
                                                 <label id="item-error" class="error" for="item"></label>
                                             </div>
@@ -286,26 +286,12 @@
 
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
-                                            <label for="item_info">Thông tin vật</label>
+                                            <label for="price">Thực nhận</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="item_info" class="form-control" value="{{ isset($order) ? $order->item_info : old('item_info') }}" placeholder="Nhập thông tin vật">
-                                                </div>
-                                                <label id="item_info-error" class="error" for="item_info"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row clearfix">
-                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
-                                            <label for="price">Giá ước tính</label>
-                                        </div>
-                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
-                                            <div class="form-group">
-                                                <div class="form-line">
-                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập giá ước tính">
+                                                    <input type="text" name="price" id="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập tiền sau trừ lãi">
                                                 </div>
                                                 <label id="price-error" class="error" for="price"></label>
                                             </div>
@@ -314,12 +300,25 @@
 
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
-                                            <label for="interest">Lãi suất</label>
+                                            <label for="interest">Gói vay</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('address') }}" placeholder="Lãi suất của 1 triệu / ngày">
+                                                    {{ Form::select('package',\App\Helpers\Constants::$package, isset($order) ? $order->package : old('package'), array('class' => 'form-control', 'id' => 'package')) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="package">Tiền theo ngày</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Lãi suất của 1 triệu / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
                                             </div>

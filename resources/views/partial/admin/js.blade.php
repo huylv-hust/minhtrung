@@ -52,3 +52,5 @@
 
 <!-- Common Js -->
 <script src="{{ asset('js/admin/common.js') }}"></script>
+
+<script src="{{ asset('js/admin/date.js') }}"></script>

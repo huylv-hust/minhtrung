@@ -17,4 +17,8 @@ class Constants
         0 => 'Ngừng hoạt động',
         1 => 'Đang hoạt động'
     ];
+    public static $package = [
+        50 => '50 Ngày',
+        100 => '100 Ngày',
+    ];
 }
