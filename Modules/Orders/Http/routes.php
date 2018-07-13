@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'admin/orders', 'namespace' => 'Modules\Orders\Http\Controllers\Admin'], function()
+Route::group(['middleware' =>  ['web', 'auth'], 'prefix' => 'admin/orders', 'namespace' => 'Modules\Orders\Http\Controllers\Admin'], function()
 {
     Route::get('/', 'OrdersController@index')->name('admin_orders_list');
     Route::get('/create/{id}', 'OrdersController@create')->name('admin_orders_show_create');

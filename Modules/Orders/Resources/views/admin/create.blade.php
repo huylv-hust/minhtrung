@@ -1,5 +1,6 @@
 @extends('layouts/admin/default')
 @section('content')
+    <script> var token = '<?php echo csrf_token()?>';</script>
     <script src="{{ asset('js/modules/orders.js') }}"></script>
     <section class="content">
         <div class="container-fluid">
@@ -150,6 +151,20 @@
                                     </div>
 
                                     <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="money">Tiền đáo hạn</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                </div>
+                                                <label id="money-error" class="error" for="money"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
                                         <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
                                             <button type="submit" class="btn btn-primary waves-effect">
                                                 <i class="material-icons">note_add</i> Lưu
@@ -226,6 +241,20 @@
                                                     <input type="text" name="end_date" class="datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : old('end_date') }}" placeholder="Nhập ngày đáo hạn">
                                                 </div>
                                                 <label id="end_date-error" class="error" for="end_date"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="money">Tiền đáo hạn</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                </div>
+                                                <label id="money-error" class="error" for="money"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -336,6 +365,29 @@
                                                 </div>
                                                 <label id="end_date-error" class="error" for="end_date"></label>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="money">Tiền đáo hạn</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                </div>
+                                                <label id="money-error" class="error" for="money"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="pay_date">Thanh toán</label>
+                                        </div>
+                                        <div id="day_table" class="col-lg-6 col-md-6 col-sm-8 col-xs-7" style="padding-left: 0">
+                                            @include('ajax::admin.table', ['day' => 50])
                                         </div>
                                     </div>
 

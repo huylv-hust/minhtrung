@@ -1,0 +1,16 @@
+{
+    "name": "Ajax",
+    "alias": "ajax",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Ajax\\Providers\\AjaxServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

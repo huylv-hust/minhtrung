@@ -102,16 +102,6 @@ var Customer = function () {
         });
     };
 
-    var calculator =  function () {
-        $('#price, #package').on('change', function () {
-            var price = $('#price').val(),
-                package = $('#package option:selected').val(),
-                next_day = new Date.today().addDays(package).toString("dd-MM-yyyy");
-            $('#form_create_installment input[name="interest"]').val(price/package);
-            $('#form_create_installment input[name="end_date"]').val(next_day);
-        });
-    };
-
     var submit = function(){
         var form = $('#form_create_customer'),
             valid;
@@ -127,6 +117,31 @@ var Customer = function () {
         });
     };
 
+    var calculator =  function () {
+        $('#price, #package').on('change', function () {
+            var price = $('#price').val(),
+                package = $('#package option:selected').val(),
+                next_day = new Date.today().addDays(package).toString("dd-MM-yyyy");
+            $('#form_create_installment input[name="interest"]').val(price/package);
+            $('#form_create_installment input[name="end_date"]').val(next_day);
+        });
+    };
+
+    var create_table = function () {
+        $('#package').on('change', function () {
+            var package = $('#package option:selected').val();
+            var request = $.ajax({
+                headers: {'X-CSRF-TOKEN': token},
+                type: 'post',
+                data: {day: package},
+                url: baseUrl + '/ajax/table'
+            });
+            var response = request.done(function(data){
+                $('#day_table').html(data);
+            });
+        });
+    };
+
     return {
         init: function () {
             search();
@@ -135,6 +150,7 @@ var Customer = function () {
             del();
             validate();
             calculator();
+            create_table();
             submit();
         }
     };
