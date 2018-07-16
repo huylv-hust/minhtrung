@@ -210,7 +210,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập giá ước tính">
+                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
                                                 </div>
                                                 <label id="price-error" class="error" for="price"></label>
                                             </div>
@@ -300,29 +300,29 @@
 
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
-                                            <label for="item">Khoản vay</label>
+                                            <label for="price">Khoản vay</label>
                                         </div>
 
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="item" class="form-control" value="{{ isset($order) ? $order->item : old('item') }}" placeholder="Nhập khoản vay">
+                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
                                                 </div>
-                                                <label id="item-error" class="error" for="item"></label>
+                                                <label id="price-error" class="error" for="price"></label>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
-                                            <label for="price">Thực nhận</label>
+                                            <label for="real_price">Thực nhận</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="price" id="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập tiền sau trừ lãi">
+                                                    <input type="text" name="real_price" id="real_price" class="form-control" value="{{ isset($order) ? $order->real_price : old('real_price') }}" placeholder="Nhập tiền sau trừ lãi">
                                                 </div>
-                                                <label id="price-error" class="error" for="price"></label>
+                                                <label id="real_price-error" class="error" for="real_price"></label>
                                             </div>
                                         </div>
                                     </div>

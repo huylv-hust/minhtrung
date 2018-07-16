@@ -29,82 +29,107 @@ var Customer = function () {
         });
     };
 
-    var validate = function(){
-        $('#form_create_customer').validate({
+    var validate = function(id){
+        $(id).validate({
             rules: {
-                name: {
+                item: {
                     required: true,
                     check_all_space: true,
-                    maxlength: 50
+                    maxlength: 255
                 },
-                cmt: {
+                item_info: {
                     required: true,
                     check_all_space: true,
-                    maxlength: 50,
+                    maxlength: 255
+                },
+                price: {
+                    required: true,
+                    check_all_space: true,
+                    maxlength: 10,
+                    number: true
+                },real_price: {
+                    required: true,
+                    check_all_space: true,
+                    maxlength: 10,
                     number: true
                 },
-                birthday: {
+                interest: {
+                    required: true,
+                    check_all_space: true,
+                    maxlength: 10,
+                    number: true
+                },
+                end_date: {
                     required: true
                 },
-                address: {
+                money: {
                     required: true,
                     check_all_space: true,
-                    maxlength: 200
-                },
-                phone: {
-                    required: true,
-                    check_all_space: true,
-                    maxlength: 11,
+                    maxlength: 10,
                     number: true
-                },
-                email: {
-                    required: true,
-                    check_all_space: true,
-                    maxlength: 100
                 }
             },
             messages: {
-                name: {
-                    required: 'Hãy nhập họ tên.',
-                    check_all_space: 'Hãy nhập họ tên.',
-                    maxlength: 'Nhập tối đa 50 kí tự.'
+                item: {
+                    required: 'Hãy nhập item',
+                    check_all_space: 'Hãy nhập item',
+                    maxlength: 'Hãy nhập ít hơn 255 ký tự'
                 },
-                cmt: {
-                    required: 'Hãy nhập số CMND.',
-                    check_all_space: 'Hãy nhập số CMND.',
-                    maxlength: 'Nhập tối đa 50 kí tự.',
-                    number: 'Chỉ nhập số.'
+                item_info: {
+                    required: 'Hãy nhập thông tin',
+                    check_all_space: 'Hãy nhập thông tin',
+                    maxlength: 'Nhập tối đa 255 ký tự'
                 },
-                birthday: {
-                    required: 'Hãy nhập năm sinh.'
+                price: {
+                    required: 'Hãy nhập vào giá/khoản vay',
+                    check_all_space: 'Hãy nhập vào giá/khoản vay',
+                    maxlength: 'Nhập tối đa 10 ký tự',
+                    number: 'Chỉ được nhập số'
+                },real_price: {
+                    required: 'Nhập tiền sau trừ lãi',
+                    check_all_space: 'Nhập tiền sau trừ lãi',
+                    maxlength: 'Nhập tối đa 10 ký tự',
+                    number: 'Chỉ được nhập số'
                 },
-                address: {
-                    required: 'Hãy nhập địa chỉ.',
-                    check_all_space: 'Hãy nhập địa chỉ.',
-                    maxlength: 'Nhập tối đa 200 kí tự.'
+                interest: {
+                    required: 'Hãy nhập vào tiền lãi',
+                    check_all_space: 'Hãy nhập vào tiền lãi',
+                    maxlength: 'Nhập tối đa 10 ký tự',
+                    number: 'Chỉ được nhập số'
                 },
-                phone: {
-                    required: 'Hãy nhập số điện thoại.',
-                    check_all_space: 'Hãy nhập số điện thoại.',
-                    maxlength: 'Nhập tối đa 11 kí tự.',
-                    number: 'Chỉ nhập số.'
+                end_date: {
+                    required: 'Hãy nhập vào ngày đáo hạn'
                 },
-                email: {
-                    required: 'Hãy nhập email.',
-                    check_all_space: 'Hãy nhập email.',
-                    maxlength: 'Nhập tối đa 100 kí tự.'
-                },
-                password: {
-                    required: 'Hãy nhập mật khẩu',
-                    maxlength: 'Nhập tối đa 100 kí tự.'
+                money: {
+                    required: 'Hãy nhập vào tiền đáo hạn',
+                    check_all_space: 'Hãy nhập vào tiền đáo hạn',
+                    maxlength: 'Nhập tối đa 10 ký tự',
+                    number: 'Chỉ được nhập số'
                 }
             }
         });
     };
 
-    var submit = function(){
-        var form = $('#form_create_customer'),
-            valid;
+    var submit_tab_1 = function() {
+        var form = '#form_create_handle';
+        validate(form);
+        submit(form)
+    };
+    var submit_tab_2 = function() {
+        var form = '#form_create_loans';
+        validate(form);
+        submit(form)
+    };
+    var submit_tab_3 = function() {
+        var form = '#form_create_installment';
+        validate(form);
+        submit(form)
+    };
+
+    var submit = function(id){
+        var form = $(id);
+        var valid;
+
         form.on('submit', function() {
             valid = form.valid();
             if(valid == false)
@@ -151,6 +176,9 @@ var Customer = function () {
             validate();
             calculator();
             create_table();
+            submit_tab_1();
+            submit_tab_2();
+            submit_tab_3();
             submit();
         }
     };
