@@ -347,7 +347,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Lãi suất của 1 triệu / ngày">
+                                                    <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Tiền phải trả / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
                                             </div>

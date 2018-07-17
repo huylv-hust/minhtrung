@@ -47,7 +47,8 @@ var Customer = function () {
                     check_all_space: true,
                     maxlength: 10,
                     number: true
-                },real_price: {
+                },
+                real_price: {
                     required: true,
                     check_all_space: true,
                     maxlength: 10,
@@ -85,7 +86,8 @@ var Customer = function () {
                     check_all_space: 'Hãy nhập vào giá/khoản vay',
                     maxlength: 'Nhập tối đa 10 ký tự',
                     number: 'Chỉ được nhập số'
-                },real_price: {
+                },
+                real_price: {
                     required: 'Nhập tiền sau trừ lãi',
                     check_all_space: 'Nhập tiền sau trừ lãi',
                     maxlength: 'Nhập tối đa 10 ký tự',
@@ -152,7 +154,7 @@ var Customer = function () {
         });
     };
     var calculator_money =  function () {
-        $('.end_date, .price, .interest').on('change', function () {
+        $('.end_date, .price, .interest, #package').on('change', function () {
             console.log($(this).closest('form').find('.end_date').val())
             var form = $(this).closest('form'),
                 end_date = form.find('.end_date').val().split('-').reverse().join('-'),
@@ -196,6 +198,9 @@ var Customer = function () {
             calculator_money();
             create_table();
             pay();
+            submit_tab_1();
+            submit_tab_2();
+            submit_tab_3();
             submit();
         }
     };
