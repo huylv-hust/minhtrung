@@ -179,6 +179,12 @@ var Customer = function () {
         });
     };
 
+    var pay = function () {
+        $('.btn_pay').off('click').on('click', function () {
+            console.log($(this).text())
+        });
+    };
+
     return {
         init: function () {
             search();
@@ -189,9 +195,7 @@ var Customer = function () {
             calculator();
             calculator_money();
             create_table();
-            submit_tab_1();
-            submit_tab_2();
-            submit_tab_3();
+            pay();
             submit();
         }
     };
