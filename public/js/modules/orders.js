@@ -154,7 +154,7 @@ var Customer = function () {
         });
     };
     var calculator_money =  function () {
-        $('.end_date, .price, .interest, #package').on('change', function () {
+        $('.end_date, .price, .interest').on('change', function () {
             console.log($(this).closest('form').find('.end_date').val())
             var form = $(this).closest('form'),
                 end_date = form.find('.end_date').val().split('-').reverse().join('-'),
@@ -183,7 +183,14 @@ var Customer = function () {
 
     var pay = function () {
         $('.btn_pay').off('click').on('click', function () {
-            console.log($(this).text())
+            $(this).removeClass('btn_pay bg-deep-orange').addClass('btn-success');
+            var money = $('#money').val(),
+                interest = $('#interest').val(),
+                pay_date = $('#pay_date').val();
+            if (!money)
+                money = 0;
+            $('#money').val(parseInt(money) + parseInt(interest));
+            $('#pay_date').val(pay_date + ',' + $(this).text())
         });
     };
 

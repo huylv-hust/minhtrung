@@ -306,7 +306,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="price" class="price form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
+                                                    <input type="text" name="price" id="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
                                                 </div>
                                                 <label id="price-error" class="error" for="price"></label>
                                             </div>
@@ -347,7 +347,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Tiền phải trả / ngày">
+                                                    <input type="text" name="interest" id="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Tiền phải trả / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
                                             </div>
@@ -361,7 +361,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="end_date" class="end_date datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : (old('end_date') ?: $end_date) }}" placeholder="Nhập ngày đáo hạn">
+                                                    <input type="text" name="end_date" id="end_date" class="datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : (old('end_date') ?: $end_date) }}" placeholder="Nhập ngày đáo hạn">
                                                 </div>
                                                 <label id="end_date-error" class="error" for="end_date"></label>
                                             </div>
@@ -375,7 +375,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="money" class="money form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                    <input type="text" name="money" id="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
                                                 </div>
                                                 <label id="money-error" class="error" for="money"></label>
                                             </div>
@@ -387,7 +387,8 @@
                                             <label for="pay_date">Thanh toán</label>
                                         </div>
                                         <div id="day_table" class="col-lg-6 col-md-6 col-sm-8 col-xs-7" style="padding-left: 0">
-                                            @include('ajax::admin.table', ['day' => 50])
+                                            <input type="hidden" name="pay_date" id="pay_date" class="form-control" value="{{ isset($order) ? $order->money : '' }}">
+                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->pay_date : 50])
                                         </div>
                                     </div>
 
