@@ -151,6 +151,18 @@ var Customer = function () {
             $('#form_create_installment input[name="end_date"]').val(next_day);
         });
     };
+    var calculator_money =  function () {
+        $('.end_date, .price, .interest').on('change', function () {
+            console.log($(this).closest('form').find('.end_date').val())
+            var form = $(this).closest('form'),
+                end_date = form.find('.end_date').val().split('-').reverse().join('-'),
+                today = new Date.today().toString('yyyy-MM-dd'),
+                day = (new Date(end_date) - new Date(today))/86400000,
+                price = form.find('.price').val(),
+                interest = form.find('.interest').val();
+            form.find('.money').val(parseInt((price/1000000) * day * interest) + parseInt(price));
+        });
+    };
 
     var create_table = function () {
         $('#package').on('change', function () {
@@ -175,6 +187,7 @@ var Customer = function () {
             del();
             validate();
             calculator();
+            calculator_money();
             create_table();
             submit_tab_1();
             submit_tab_2();

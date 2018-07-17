@@ -51,7 +51,7 @@
                             <div class="tab-content">
                                 <!-- Tab handle -->
                                 <div role="tabpanel" class="tab-pane fade in active" id="handle">
-                                    {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_handle', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
+                                    {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_handle', 'class'=>'form-horizontal form', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
                                     <div class="row clearfix">
                                         @if(Session::has('error'))
                                             <div class="alert alert-danger m-l-15 m-r-15">
@@ -115,7 +115,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập giá ước tính">
+                                                    <input type="text" name="price" class="price form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập giá ước tính">
                                                 </div>
                                                 <label id="price-error" class="error" for="price"></label>
                                             </div>
@@ -129,7 +129,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('address') }}" placeholder="Lãi suất của 1 triệu / ngày">
+                                                    <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('address') }}" placeholder="Lãi suất của 1 triệu / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
                                             </div>
@@ -143,7 +143,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="end_date" class="datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : old('end_date') }}" placeholder="Nhập ngày đáo hạn">
+                                                    <input type="text" name="end_date" class="end_date datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : old('end_date') }}" placeholder="Nhập ngày đáo hạn">
                                                 </div>
                                                 <label id="end_date-error" class="error" for="end_date"></label>
                                             </div>
@@ -157,7 +157,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                    <input type="text" name="money" class="money form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
                                                 </div>
                                                 <label id="money-error" class="error" for="money"></label>
                                             </div>
@@ -210,7 +210,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
+                                                    <input type="text" name="price" class="price form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
                                                 </div>
                                                 <label id="price-error" class="error" for="price"></label>
                                             </div>
@@ -224,7 +224,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('address') }}" placeholder="Lãi suất của 1 triệu / ngày">
+                                                    <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('address') }}" placeholder="Lãi suất của 1 triệu / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
                                             </div>
@@ -238,7 +238,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="end_date" class="datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : old('end_date') }}" placeholder="Nhập ngày đáo hạn">
+                                                    <input type="text" name="end_date" class="end_date datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : old('end_date') }}" placeholder="Nhập ngày đáo hạn">
                                                 </div>
                                                 <label id="end_date-error" class="error" for="end_date"></label>
                                             </div>
@@ -252,7 +252,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                    <input type="text" name="money" class="money form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
                                                 </div>
                                                 <label id="money-error" class="error" for="money"></label>
                                             </div>
@@ -306,7 +306,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="price" class="form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
+                                                    <input type="text" name="price" class="price form-control" value="{{ isset($order) ? $order->price : old('price') }}" placeholder="Nhập khoản vay">
                                                 </div>
                                                 <label id="price-error" class="error" for="price"></label>
                                             </div>
@@ -347,7 +347,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Lãi suất của 1 triệu / ngày">
+                                                    <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Lãi suất của 1 triệu / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
                                             </div>
@@ -361,7 +361,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="end_date" class="datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : old('end_date') }}" placeholder="Nhập ngày đáo hạn">
+                                                    <input type="text" name="end_date" class="end_date datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->end_date)) : (old('end_date') ?: $end_date) }}" placeholder="Nhập ngày đáo hạn">
                                                 </div>
                                                 <label id="end_date-error" class="error" for="end_date"></label>
                                             </div>
@@ -375,7 +375,7 @@
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
                                             <div class="form-group">
                                                 <div class="form-line">
-                                                    <input type="text" name="money" class="form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
+                                                    <input type="text" name="money" class="money form-control" value="{{ isset($order) ? $order->money : old('money') }}" placeholder="Số tiền đáo hạn">
                                                 </div>
                                                 <label id="money-error" class="error" for="money"></label>
                                             </div>
