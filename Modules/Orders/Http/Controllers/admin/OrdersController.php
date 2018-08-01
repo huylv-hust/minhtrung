@@ -18,7 +18,7 @@ class OrdersController extends Controller
         $filters = $request->all();
         $orders = $order->getList($filters);
         $query_string = empty($filters) ? '' : '?' . http_build_query($filters);
-        $request->session()->put('list_customer_url', $request->url() . $query_string);
+        $request->session()->put('list_order_url', $request->url() . $query_string);
         return view('orders::admin/index', compact('title', 'filters', 'orders'));
     }
 

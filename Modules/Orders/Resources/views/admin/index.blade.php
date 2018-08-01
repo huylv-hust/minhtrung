@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <button id="btn_search" type="submit" class="btn btn-success waves-effect btn-sm">
+                                    <button id="btn_search" type="button" class="btn btn-success waves-effect btn-sm">
                                         <i class="glyphicon glyphicon-search"></i> <span>Tìm kiếm</span>
                                     </button>
                                     <button id="btn_delete" type="button" class="btn btn-danger waves-effect btn-sm">

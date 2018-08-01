@@ -1,4 +1,4 @@
-var Customer = function () {
+var Order = function () {
     var search = function () {
         $('#btn_search').on('click', function () {
             $('#form_order').attr('method', 'GET').attr('action', baseUrl + '/orders').submit();
@@ -195,5 +195,5 @@ var Customer = function () {
 }();
 
 $(function () {
-    Customer.init();
+    Order.init();
 });
