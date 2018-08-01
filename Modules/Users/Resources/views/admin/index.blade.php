@@ -110,7 +110,7 @@
                                     @foreach($users as $user)
                                         <tr>
                                             <td>
-                                                {{ Form::checkbox('id[]', $user->id, false, array('class'=>'filled-in', 'id'=>'check_one'))}}
+                                                {{ Form::checkbox('id[]', $user->id, false, array('class'=>'filled-in check_one'))}}
                                                 <label for="check_one" class="custom-label"></label>
                                             </td>
                                             <td class="center">

@@ -2,10 +2,10 @@ $(function() {
     $("#check_all").click(function () {
         var check = $("#check_all").is(':checked');
         if (check == true) {
-            $("#check_one").prop('checked', true);
+            $(".check_one").prop('checked', true);
         }
         else {
-            $("#check_one").prop('checked', false);
+            $(".check_one").prop('checked', false);
         }
     });
 
