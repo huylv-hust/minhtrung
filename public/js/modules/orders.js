@@ -1,31 +1,14 @@
 var Customer = function () {
     var search = function () {
         $('#btn_search').on('click', function () {
-            $('#form_customer').attr('method', 'GET').attr('action', baseUrl + '/customers').submit();
-        });
-    };
-
-    var active = function () {
-        $('#btn_active').on('click', function () {
-            if(confirm('Ban có muốn thay đổi trạng thái?')) {
-                $('input[name = "change_status"]').attr('value', '1');
-                $('#form_customer').attr('action', baseUrl + '/customers/status').attr('method', 'POST').submit();
-            }
-        });
-    };
-    var inactive = function () {
-        $('#btn_inactive').on('click', function () {
-            if(confirm('Ban có muốn thay đổi trạng thái?')) {
-                $('input[name = "change_status"]').attr('value', '0');
-                $('#form_customer').attr('action', baseUrl + '/customers/status').attr('method', 'POST').submit();
-            }
+            $('#form_order').attr('method', 'GET').attr('action', baseUrl + '/orders').submit();
         });
     };
 
     var del = function () {
         $('#btn_delete').on('click', function () {
             if(confirm('Ban có muốn xóa khách hàng?'))
-                $('#form_customer').attr('action', baseUrl + '/customers/delete').attr('method', 'POST').submit();
+                $('#form_order').attr('action', baseUrl + '/orders/delete').attr('method', 'POST').submit();
         });
     };
 
@@ -197,8 +180,6 @@ var Customer = function () {
     return {
         init: function () {
             search();
-            active();
-            inactive();
             del();
             validate();
             calculator();

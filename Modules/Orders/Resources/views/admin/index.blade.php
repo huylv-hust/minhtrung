@@ -1,13 +1,13 @@
 @extends('layouts/admin/default')
 @section('content')
-    <script src="{{ asset('js/modules/customers.js') }}"></script>
+    <script src="{{ asset('js/modules/orders.js') }}"></script>
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
                 <!---BREADCRUMB-->
                 <ol class="breadcrumb">
                     <li>
-                        <a href="{{ route('admin_customers_list') }}">
+                        <a href="{{ route('admin_orders_list') }}">
                             <i class="material-icons">mood</i> Khách hàng
                         </a>
                     </li>
@@ -30,7 +30,7 @@
                         </div>
                         <!--CONTENT-->
                         <div class="body">
-                        {{ Form::open(array('id'=>'form_customer')) }}
+                        {{ Form::open(array('id'=>'form_order')) }}
                         <!--FORM SEARCH-->
                             <div class="row clearfix">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -59,7 +59,7 @@
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                                     <div class="form-group">
                                         <div class="form-line">
-                                            {{ Form::text('email',isset($filters['email']) ? $filters['email'] : '',array('placeholder'=>'Email', 'class' => 'form-control')) }}
+                                            {{ Form::text('end_date',isset($filters['end_date']) ? date('d-m-Y', strtotime($filters['end_date'])) : '',array('placeholder'=>'Ngày đáo hạn', 'class' => 'end_date datepicker form-control')) }}
                                         </div>
                                     </div>
                                 </div>
@@ -67,26 +67,13 @@
                                     <button id="btn_search" type="submit" class="btn btn-success waves-effect btn-sm">
                                         <i class="glyphicon glyphicon-search"></i> <span>Tìm kiếm</span>
                                     </button>
-                                    <a href="{{ route('admin_customers_show_create') }}" class="btn btn-primary waves-effect btn-sm">
-                                        <i class="glyphicon glyphicon-plus"></i> <span>Thêm mới</span>
-                                    </a>
                                     <button id="btn_delete" type="button" class="btn btn-danger waves-effect btn-sm">
                                         <i class="glyphicon glyphicon-trash"></i> <span>Xóa</span>
                                     </button>
                                 </div>
                             </div>
                             <!---BUTTON ACTION-->
-                            <div class="row clearfix">
-                                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-                                    <button id="btn_active" type="button" class="btn btn-success waves-effect btn-sm">
-                                        <i class="glyphicon glyphicon glyphicon-ok-circle"></i> <span>Hoạt động</span>
-                                    </button>
-                                    <button id="btn_inactive" type="button" class="btn bg-deep-orange waves-effect btn-sm">
-                                        <i class="glyphicon glyphicon-ban-circle"></i> <span>Ngừng hoạt động</span>
-                                    </button>
-                                </div>
-                                <input type="hidden" name="change_status" value="">
-                            </div>
+
                             <!--ALERT MESSAGE-->
                             <div class="row clearfix">
                                 @if(Session::has('error'))
@@ -114,51 +101,57 @@
                                         </th>
                                         <th>Tên</th>
                                         <th>CMND</th>
-                                        <th>Địa chỉ</th>
                                         <th>Điện thoại</th>
-                                        <th>Email</th>
+                                        <th>Khoản vay</th>
+                                        <th>Ngày đáo hạn</th>
+                                        <th>Hình thức</th>
                                         <th>Trạng thái</th>
                                         <th>Thao tác</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($customers as $customer)
+                                    @foreach($orders as $order)
                                         <tr>
                                             <td>
-                                                {{ Form::checkbox('id[]', $customer->id, false, array('class'=>'filled-in', 'id'=>'check_one'))}}
+                                                {{ Form::checkbox('id[]', $order->id, false, array('class'=>'filled-in', 'id'=>'check_one'))}}
                                                 <label for="check_one" class="custom-label"></label>
                                             </td>
                                             <td class="center">
-                                                {{ $customer->name }}
+                                                {{ $order->cus_name }}
                                             </td>
                                             <td class="center">
-                                                {{ $customer->cmt }}
+                                                {{ $order->cus_cmt }}
                                             </td>
                                             <td class="center">
-                                                {{ $customer->address }}
+                                                {{ $order->cus_phone }}
                                             </td>
                                             <td class="center">
-                                                {{ $customer->phone }}
+                                                {{ $order->price }}
                                             </td>
                                             <td class="center">
-                                                {{ $customer->email }}
+                                                {{ date("d-m-Y", strtotime($order->end_date)) }}
                                             </td>
                                             <td class="center">
-                                                @if($customer->status == 1)
-                                                    <span class="label label-success label-sts">{{ \App\Helpers\Constants::$status[$customer->status] }}</span>
+                                                <b>{{ \App\Helpers\Constants::$type[$order->type] }}</b>
+                                            </td>
+                                            <td class="center">
+                                                @if($order->status == 1)
+                                                    <span class="label label-success label-sts">{{ \App\Helpers\Constants::$pay[$order->status] }}</span>
                                                 @else
-                                                    <span class="label bg-deep-orange label-sts">{{ \App\Helpers\Constants::$status[$customer->status] }}</span>
+                                                    <span class="label bg-deep-orange label-sts">{{ \App\Helpers\Constants::$pay[$order->status] }}</span>
                                                 @endif
                                             </td>
                                             <td>
+                                                @if($order->status == 0)
+                                                    <a class="btn bg-purple btn-xs waves-effect"
+                                                       href="{{ route('admin_orders_pay',array('id'=>$order->id)) }}">
+                                                        <i class="glyphicon glyphicon-ok"></i> <span>Thanh toán</span>
+                                                    </a>
                                                 <a class="btn bg-purple btn-xs waves-effect"
-                                                   href="{{ route('admin_customers_edit',array('id'=>$customer->id)) }}">
+                                                   href="{{ route('admin_orders_edit',array('id'=>$order->id)) }}">
                                                     <i class="glyphicon glyphicon-edit"></i> <span>Sửa</span>
                                                 </a>
-                                                <a class="btn bg-purple btn-xs waves-effect"
-                                                   href="{{ route('admin_customers_edit',array('id'=>$customer->id)) }}">
-                                                    <i class="glyphicon glyphicon-usd"></i> <span>Vay</span>
-                                                </a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach
@@ -168,9 +161,9 @@
                             <!--PAGINATION-->
                             <nav>
                                 <?php if (isset($filters)) {
-                                    echo $customers->appends($filters)->links('helpers.pagination');
+                                    echo $orders->appends($filters)->links('helpers.pagination');
                                 } else {
-                                    echo $customers->links('helpers.pagination');
+                                    echo $orders->links('helpers.pagination');
                                 } ?>
                             </nav>
                             {{ Form::close() }}

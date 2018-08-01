@@ -31,17 +31,17 @@
                         <div class="body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active">
+                                <li role="presentation" class="{{ (isset($order->type) && $order->type == 1) || isset($end_date) ?  'active' : '' }}">
                                     <a href="#handle" data-toggle="tab">
                                         <i class="material-icons">account_balance</i> CẦM ĐỒ
                                     </a>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" class="{{ isset($order->type) && $order->type == 2 ? 'active' : '' }}">
                                     <a href="#loans" data-toggle="tab">
                                         <i class="material-icons">local_atm</i> VAY LÃI
                                     </a>
                                 </li>
-                                <li role="presentation">
+                                <li role="presentation" class="{{ isset($order->type) && $order->type == 3 ? 'active' : '' }}">
                                     <a href="#installment" data-toggle="tab">
                                         <i class="material-icons">casino</i> TRẢ GÓP
                                     </a>
@@ -50,7 +50,7 @@
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <!-- Tab handle -->
-                                <div role="tabpanel" class="tab-pane fade in active" id="handle">
+                                <div role="tabpanel" class="tab-pane fade {{ (isset($order->type) && $order->type == 1) || isset($end_date) ?  'active in' : '' }}" id="handle">
                                     {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_handle', 'class'=>'form-horizontal form', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
                                     <div class="row clearfix">
                                         @if(Session::has('error'))
@@ -67,6 +67,7 @@
                                         @endif
                                     </div>
                                     <input type="hidden" name="type" value="1">
+                                    <input type="hidden" name="status" value="{{ isset($pay) ? 1 : 0 }}">
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
                                             <label for="name">Khách hàng</label>
@@ -167,14 +168,14 @@
                                     <div class="row clearfix">
                                         <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
                                             <button type="submit" class="btn btn-primary waves-effect">
-                                                <i class="material-icons">note_add</i> Lưu
+                                                <i class="material-icons">note_add</i> {{ isset($pay) ? 'Thanh toán' : 'Lưu lại' }}
                                             </button>
                                         </div>
                                     </div>
                                     {{ Form::close() }}
                                 </div>
                                 <!-- Tab loans -->
-                                <div role="tabpanel" class="tab-pane fade" id="loans">
+                                <div role="tabpanel" class="tab-pane fade {{ isset($order->type) && $order->type == 2 ? 'active in' : '' }}" id="loans">
                                     {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_loans', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
                                     <div class="row clearfix">
                                         @if(Session::has('error'))
@@ -191,6 +192,7 @@
                                         @endif
                                     </div>
                                     <input type="hidden" name="type" value="2">
+                                    <input type="hidden" name="status" value="{{ isset($pay) ? 1 : 0 }}">
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
                                             <label for="name">Khách hàng</label>
@@ -262,14 +264,14 @@
                                     <div class="row clearfix">
                                         <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
                                             <button type="submit" class="btn btn-primary waves-effect">
-                                                <i class="material-icons">note_add</i> Lưu
+                                                <i class="material-icons">note_add</i> {{ isset($pay) ? 'Thanh toán' : 'Lưu lại' }}
                                             </button>
                                         </div>
                                     </div>
                                     {{ Form::close() }}
                                 </div>
                                 <!-- Tab installment -->
-                                <div role="tabpanel" class="tab-pane fade" id="installment">
+                                <div role="tabpanel" class="tab-pane fade {{ isset($order->type) && $order->type == 3 ? 'active in' : '' }}" id="installment">
                                     {{ Form::open(array('url' => isset($order) ? route('admin_orders_edit', ['id' => $order->id]) : route('admin_orders_create', ['id' => $customer->id]), 'id' => 'form_create_installment', 'class'=>'form-horizontal', 'method'=>'post', 'role' => 'form', 'files' => true)) }}
                                     <div class="row clearfix">
                                         @if(Session::has('error'))
@@ -286,6 +288,7 @@
                                         @endif
                                     </div>
                                     <input type="hidden" name="type" value="3">
+                                    <input type="hidden" name="status" value="{{ isset($pay) ? 1 : 0 }}">
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
                                             <label for="name">Khách hàng</label>
@@ -387,15 +390,15 @@
                                             <label for="pay_date">Thanh toán</label>
                                         </div>
                                         <div id="day_table" class="col-lg-6 col-md-6 col-sm-8 col-xs-7" style="padding-left: 0">
-                                            <input type="hidden" name="pay_date" id="pay_date" class="form-control" value="{{ isset($order) ? $order->money : '' }}">
-                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->pay_date : 50])
+                                            <input type="hidden" name="pay_date" id="pay_date" class="form-control" value="{{ isset($order) ? $order->pay_date : '' }}">
+                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->package : 50])
                                         </div>
                                     </div>
 
                                     <div class="row clearfix">
                                         <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-5 col-xs-offset-5">
                                             <button type="submit" class="btn btn-primary waves-effect">
-                                                <i class="material-icons">note_add</i> Lưu
+                                                <i class="material-icons">note_add</i> {{ isset($pay) ? 'Thanh toán' : 'Lưu lại' }}
                                             </button>
                                         </div>
                                     </div>

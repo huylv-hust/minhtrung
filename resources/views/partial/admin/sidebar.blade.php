@@ -60,7 +60,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('admin_orders_list') }}">
                         <i class="material-icons">attach_money</i>
                         <span>Khoản vay</span>
                     </a>
@@ -73,10 +73,10 @@
                     </a>
                     <ul class="ml-menu">
                         <li>
-                            <a href="{{ route('admin_users_list') }}">Danh sách người dùng</a>
+                            <a href="#">Danh sách người dùng</a>
                         </li>
                         <li>
-                            <a href="{{ route('admin_users_show_create') }}">Thêm mới người dùng</a>
+                            <a href="#">Thêm mới người dùng</a>
                         </li>
                     </ul>
                 </li>

@@ -76,11 +76,7 @@ class CustomersController extends Controller
             Session::flash('error', Constants::$AT_LEAST_1_RECORD);
             return redirect()->back();
         }
-        if (in_array(Auth::user()->id, $ids)) {
-            Session::flash('error', 'Tài khoản đang đăng nhập, bạn không thể xóa.');
-            return redirect()->back();
-        }
-        if (User::destroy($ids)) {
+        if (Customer::destroy($ids)) {
             Session::flash('success', Constants::$COMMON_SAVE_OK);
         } else {
             Session::flash('error', Constants::$SAVE_FAILED);

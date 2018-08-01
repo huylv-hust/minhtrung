@@ -16,7 +16,7 @@ class Order extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cus_id', 'item', 'item_info', 'price', 'real_price', 'interest', 'end_date', 'money', 'pay_date', 'type'
+        'cus_id', 'item', 'item_info', 'price', 'real_price', 'package','interest', 'end_date', 'money', 'pay_date', 'type', 'status'
     ];
 
     /**
@@ -29,18 +29,26 @@ class Order extends Authenticatable
 
     public function getList($filters = [], $type = null)
     {
-        $query = static::select(['*']);
+        $select = [
+            'orders.*',
+            'customers.name as cus_name',
+            'customers.cmt as cus_cmt',
+            'customers.phone as cus_phone'
+        ];
+        $query = static::select($select)
+            ->leftjoin('customers', 'customers.id', '=', 'orders.cus_id');;
         if (isset($filters['name']) && $filters['name']) {
-            $query->where('name', 'like', '%' . $filters['name'] . '%');
+            $query->where('customers.name', 'like', '%' . $filters['name'] . '%');
         }
         if (isset($filters['cmt']) && $filters['cmt']) {
-            $query->where('cmt', 'like', '%' . $filters['cmt'] . '%');
+            $query->where('customers.cmt', 'like', '%' . $filters['cmt'] . '%');
         }
         if (isset($filters['phone']) && $filters['phone']) {
-            $query->where('phone', 'like', '%' . $filters['phone'] . '%');
+            $query->where('customers.phone', 'like', '%' . $filters['phone'] . '%');
         }
-        if (isset($filters['email']) && $filters['email']) {
-            $query->where('email', 'like', '%' . $filters['email'] . '%');
+        if (isset($filters['end_date']) && $filters['end_date']) {
+            $filters['end_date'] = date('Y-m-d', strtotime($filters['end_date']));
+            $query->where('end_date', 'like', '%' . $filters['end_date'] . '%');
         }
         if ($type == 'count') {
             return $query->count();
