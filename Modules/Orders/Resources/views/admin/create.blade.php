@@ -139,6 +139,20 @@
 
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="end_date">Ngày vay</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="start_date" class="start_date datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->start_date)) : old('start_date') }}" placeholder="Nhập ngày vay">
+                                                </div>
+                                                <label id="start_date-error" class="error" for="start_date"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
                                             <label for="end_date">Ngày đáo hạn</label>
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
@@ -229,6 +243,20 @@
                                                     <input type="text" name="interest" class="interest form-control" value="{{ isset($order) ? $order->interest : old('address') }}" placeholder="Lãi suất của 1 triệu / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="end_date">Ngày vay</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="start_date" class="start_date datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->start_date)) : old('start_date') }}" placeholder="Nhập ngày vay">
+                                                </div>
+                                                <label id="start_date-error" class="error" for="start_date"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -353,6 +381,20 @@
                                                     <input type="text" name="interest" id="interest" class="form-control" value="{{ isset($order) ? $order->interest : old('interest') }}" placeholder="Tiền phải trả / ngày">
                                                 </div>
                                                 <label id="interest-error" class="error" for="interest"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row clearfix">
+                                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
+                                            <label for="end_date">Ngày vay</label>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-7">
+                                            <div class="form-group">
+                                                <div class="form-line">
+                                                    <input type="text" name="start_date" id="start_date" class="datepicker form-control" value="{{ isset($order) ? date('d-m-Y', strtotime($order->start_date)) : (old('start_date') ?: $start_date) }}" placeholder="Nhập ngày vay">
+                                                </div>
+                                                <label id="start_date-error" class="error" for="start_date"></label>
                                             </div>
                                         </div>
                                     </div>

@@ -103,6 +103,7 @@
                                         <th>CMND</th>
                                         <th>Điện thoại</th>
                                         <th>Khoản vay</th>
+                                        <th>Ngày vay</th>
                                         <th>Ngày đáo hạn</th>
                                         <th>Hình thức</th>
                                         <th>Trạng thái</th>
@@ -126,7 +127,10 @@
                                                 {{ $order->cus_phone }}
                                             </td>
                                             <td class="center">
-                                                {{ $order->price }}
+                                                {{ number_format($order->price) }}
+                                            </td>
+                                            <td class="center">
+                                                {{ date('d-m-Y', strtotime($order->start_date)) }}
                                             </td>
                                             <td class="center">
                                                 {{ date("d-m-Y", strtotime($order->end_date)) }}

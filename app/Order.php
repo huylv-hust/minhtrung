@@ -16,7 +16,7 @@ class Order extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'cus_id', 'item', 'item_info', 'price', 'real_price', 'package','interest', 'end_date', 'money', 'pay_date', 'type', 'status'
+        'cus_id', 'item', 'item_info', 'price', 'real_price', 'package','interest', 'start_date', 'end_date', 'money', 'pay_date', 'type', 'status'
     ];
 
     /**

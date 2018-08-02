@@ -43,6 +43,9 @@ var Order = function () {
                     maxlength: 10,
                     number: true
                 },
+                start_date: {
+                    required: true
+                },
                 end_date: {
                     required: true
                 },
@@ -81,6 +84,9 @@ var Order = function () {
                     check_all_space: 'Hãy nhập vào tiền lãi',
                     maxlength: 'Nhập tối đa 10 ký tự',
                     number: 'Chỉ được nhập số'
+                },
+                start_date: {
+                    required: 'Hãy nhập vào ngày vay'
                 },
                 end_date: {
                     required: 'Hãy nhập vào ngày đáo hạn'
@@ -128,21 +134,21 @@ var Order = function () {
     };
 
     var calculator =  function () {
-        $('#price, #package').on('change', function () {
+        $('#start_date, #price, #package').on('change', function () {
             var price = $('#price').val(),
                 package = $('#package option:selected').val(),
-                next_day = new Date.today().addDays(package - 1).toString("dd-MM-yyyy");
+                start_date = $('#start_date').val().split('-').reverse().join('-'),
+                next_day = new Date(start_date).addDays(package - 1).toString("dd-MM-yyyy");
             $('#form_create_installment input[name="interest"]').val(price/package);
             $('#form_create_installment input[name="end_date"]').val(next_day);
         });
     };
     var calculator_money =  function () {
         $('.end_date, .price, .interest').on('change', function () {
-            console.log($(this).closest('form').find('.end_date').val())
             var form = $(this).closest('form'),
                 end_date = form.find('.end_date').val().split('-').reverse().join('-'),
-                today = new Date.today().toString('yyyy-MM-dd'),
-                day = (new Date(end_date) - new Date(today))/86400000 + 1,
+                start_date = form.find('.start_date').val().split('-').reverse().join('-'),
+                day = (new Date(end_date) - new Date(start_date))/86400000 + 1,
                 price = form.find('.price').val(),
                 interest = form.find('.interest').val();
             form.find('.money').val(parseInt((price/1000000) * day * interest) + parseInt(price));

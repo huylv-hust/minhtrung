@@ -25,15 +25,17 @@ class OrdersController extends Controller
     public function create($id)
     {
         $customer = Customer::findOrFail($id);
+        $start_date = date('d-m-Y');
         $end_date = date('d-m-Y', strtotime('+49 day'));
         $title = 'Tạo khoản vay';
-        return view('orders::admin/create', compact('title' , 'customer', 'end_date'));
+        return view('orders::admin/create', compact('title' , 'customer', 'end_date', 'start_date'));
     }
 
     public function store(Request $request, $id)
     {
         $input = $request->all();
         $input['cus_id'] = $id;
+        $input['start_date'] = date('Y-m-d', strtotime($input['start_date']));
         $input['end_date'] = date('Y-m-d', strtotime($input['end_date']));
         if (Order::create($input)) {
             Session::flash('success', Constants::$COMMON_SAVE_OK);
@@ -64,6 +66,7 @@ class OrdersController extends Controller
     {
         $input = $request->all();
         $order = Order::findOrFail($id);
+        $input['start_date'] = date('Y-m-d', strtotime($input['start_date']));
         $input['end_date'] = date('Y-m-d', strtotime($input['end_date']));
         if ($order->update($input)) {
             Session::flash('success', Constants::$COMMON_SAVE_OK);
