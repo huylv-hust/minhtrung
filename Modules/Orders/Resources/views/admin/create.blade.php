@@ -433,7 +433,7 @@
                                         </div>
                                         <div id="day_table" class="col-lg-6 col-md-6 col-sm-8 col-xs-7" style="padding-left: 0">
                                             <input type="hidden" name="pay_date" id="pay_date" class="form-control" value="{{ isset($order) ? $order->pay_date : '' }}">
-                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->package : 50])
+                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->package : 50, 'start_date' => isset($order) ? $order->start_day : $start_date])
                                         </div>
                                     </div>
 

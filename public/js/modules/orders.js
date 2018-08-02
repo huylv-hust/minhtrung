@@ -156,12 +156,13 @@ var Order = function () {
     };
 
     var create_table = function () {
-        $('#package').on('change', function () {
-            var package = $('#package option:selected').val();
+        $('#start_date, #package').on('change', function () {
+            var package = $('#package option:selected').val(),
+                start_date = $('#start_date').val().split('-').reverse().join('-');
             var request = $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
                 type: 'post',
-                data: {day: package},
+                data: {start_date: start_date, day: package},
                 url: baseUrl + '/ajax/table'
             });
             var response = request.done(function(data){
