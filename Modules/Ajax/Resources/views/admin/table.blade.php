@@ -6,7 +6,7 @@
                 <?php for($col = 1; $col <= 10; $col++) {?>
                 <td>
                     <?php $num = ($row - 1) * 10 + $col?>
-                    <?php $date = date('d-m', strtotime(' +'. $num .' day'));?>
+                    <?php $date = date('d-m', strtotime(' +'. $num - 1 .' day'));?>
                     @if(isset($order) && strpos($order->pay_date, $date))
                     <button type="button" class="btn btn-success waves-effect" title="Đã thanh toán">{{ $date }}</button>
                     @else

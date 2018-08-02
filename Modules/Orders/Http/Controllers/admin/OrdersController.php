@@ -25,7 +25,7 @@ class OrdersController extends Controller
     public function create($id)
     {
         $customer = Customer::findOrFail($id);
-        $end_date = date('d-m-Y', strtotime('+50 day'));
+        $end_date = date('d-m-Y', strtotime('+49 day'));
         $title = 'Tạo khoản vay';
         return view('orders::admin/create', compact('title' , 'customer', 'end_date'));
     }

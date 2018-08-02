@@ -131,7 +131,7 @@ var Order = function () {
         $('#price, #package').on('change', function () {
             var price = $('#price').val(),
                 package = $('#package option:selected').val(),
-                next_day = new Date.today().addDays(package).toString("dd-MM-yyyy");
+                next_day = new Date.today().addDays(package - 1).toString("dd-MM-yyyy");
             $('#form_create_installment input[name="interest"]').val(price/package);
             $('#form_create_installment input[name="end_date"]').val(next_day);
         });
@@ -142,7 +142,7 @@ var Order = function () {
             var form = $(this).closest('form'),
                 end_date = form.find('.end_date').val().split('-').reverse().join('-'),
                 today = new Date.today().toString('yyyy-MM-dd'),
-                day = (new Date(end_date) - new Date(today))/86400000,
+                day = (new Date(end_date) - new Date(today))/86400000 + 1,
                 price = form.find('.price').val(),
                 interest = form.find('.interest').val();
             form.find('.money').val(parseInt((price/1000000) * day * interest) + parseInt(price));
@@ -165,7 +165,7 @@ var Order = function () {
     };
 
     var pay = function () {
-        $('.btn_pay').off('click').on('click', function () {
+        $(document).on('click', '.btn_pay', function () {
             $(this).removeClass('btn_pay bg-deep-orange').addClass('btn-success');
             var money = $('#money').val(),
                 interest = $('#interest').val(),
