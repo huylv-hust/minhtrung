@@ -67,6 +67,7 @@
                                         @endif
                                     </div>
                                     <input type="hidden" name="type" value="1">
+                                    <input type="hidden" name="id" value="{{ isset($order) ? $order->id : '' }}">
                                     <input type="hidden" name="status" value="{{ isset($pay) ? 1 : 0 }}">
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
@@ -430,10 +431,10 @@
                                     <div class="row clearfix">
                                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-5 form-control-label">
                                             <label for="pay_date">Thanh toán</label>
+                                            <input type="hidden" name="pay_date" id="pay_date" class="form-control" value="{{ isset($order) ? $order->pay_date : '' }}">
                                         </div>
                                         <div id="day_table" class="col-lg-6 col-md-6 col-sm-8 col-xs-7" style="padding-left: 0">
-                                            <input type="hidden" name="pay_date" id="pay_date" class="form-control" value="{{ isset($order) ? $order->pay_date : '' }}">
-                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->package : 50, 'start_date' => isset($order) ? $order->start_day : $start_date])
+                                            @include('ajax::admin.table', ['day' => isset($order) ? $order->package : 50, 'start_date' => isset($order) ? $order->start_date : $start_date])
                                         </div>
                                     </div>
 

@@ -157,12 +157,13 @@ var Order = function () {
 
     var create_table = function () {
         $('#start_date, #package').on('change', function () {
-            var package = $('#package option:selected').val(),
+            var pay_date = $('#pay_date').val(),
+                package = $('#package option:selected').val(),
                 start_date = $('#start_date').val().split('-').reverse().join('-');
             var request = $.ajax({
                 headers: {'X-CSRF-TOKEN': token},
                 type: 'post',
-                data: {start_date: start_date, day: package},
+                data: {pay_date: pay_date, start_date: start_date, day: package},
                 url: baseUrl + '/ajax/table'
             });
             var response = request.done(function(data){

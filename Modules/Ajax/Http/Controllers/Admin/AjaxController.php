@@ -11,9 +11,10 @@ class AjaxController extends Controller
 {
     public function createTable(Request $request)
     {
-        $start_day = $request->post('start_day');
+        $pay_date = $request->post('pay_date');
+        $start_date = $request->post('start_date');
         $day = $request->post('day');
-        echo response()->view('ajax::admin/table', compact('start_day', 'day'))
+        echo response()->view('ajax::admin/table', compact('pay_date', 'start_date', 'day'))
             ->header('Content-Type', 'application/json')->content();
         exit;
     }
