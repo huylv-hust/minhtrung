@@ -27,8 +27,9 @@ class OrdersController extends Controller
         $customer = Customer::findOrFail($id);
         $start_date = date('d-m-Y');
         $end_date = date('d-m-Y', strtotime('+49 day'));
+        $pay_date = '';
         $title = 'Tạo khoản vay';
-        return view('orders::admin/create', compact('title' , 'customer', 'end_date', 'start_date'));
+        return view('orders::admin/create', compact('title', 'customer', 'end_date', 'start_date', 'pay_date'));
     }
 
     public function store(Request $request, $id)
@@ -51,7 +52,7 @@ class OrdersController extends Controller
         $pay = true;
         $order = Order::findOrFail($id);
         $customer = Customer::findOrFail($order->cus_id);
-        return view('orders::admin/create', compact('title' , 'order', 'customer', 'pay'));
+        return view('orders::admin/create', compact('title', 'order', 'customer', 'pay'));
     }
 
     public function edit($id)
@@ -59,7 +60,7 @@ class OrdersController extends Controller
         $title = 'Sửa hóa đơn';
         $order = Order::findOrFail($id);
         $customer = Customer::findOrFail($order->cus_id);
-        return view('orders::admin/create', compact('title' , 'order', 'customer'));
+        return view('orders::admin/create', compact('title', 'order', 'customer'));
     }
 
     public function update(Request $request, $id)

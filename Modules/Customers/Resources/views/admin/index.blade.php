@@ -122,11 +122,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($customers as $customer)
+                                    @foreach($customers as $key => $customer)
                                         <tr>
                                             <td>
-                                                {{ Form::checkbox('id[]', $customer->id, false, array('class'=>'filled-in check_one'))}}
-                                                <label for="check_one" class="custom-label"></label>
+                                                {{ Form::checkbox('id[]', $customer->id, false, array('class'=>'filled-in check_one', 'id' => 'check_one_' . $key))}}
+                                                <label for="check_one_{{ $key }}" class="custom-label"></label>
                                             </td>
                                             <td class="center">
                                                 {{ $customer->name }}

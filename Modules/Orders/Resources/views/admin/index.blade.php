@@ -111,11 +111,11 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($orders as $order)
+                                    @foreach($orders as $key => $order)
                                         <tr>
                                             <td>
-                                                {{ Form::checkbox('id[]', $order->id, false, array('class'=>'filled-in check_one'))}}
-                                                <label for="check_one" class="custom-label"></label>
+                                                {{ Form::checkbox('id[]', $order->id, false, array('class'=>'filled-in check_one', 'id' => 'check_one_'.$key))}}
+                                                <label for="check_one_{{ $key }}" class="custom-label"></label>
                                             </td>
                                             <td class="center">
                                                 {{ $order->cus_name }}
