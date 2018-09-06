@@ -59,8 +59,10 @@ class OrdersController extends Controller
     {
         $title = 'Sửa hóa đơn';
         $order = Order::findOrFail($id);
+        $start_date = isset($order->start_date) ? $order->start_date : date('d-m-Y');
+        $end_date = isset($order->end_date) ? $order->end_date : date('d-m-Y', strtotime('+49 day'));
         $customer = Customer::findOrFail($order->cus_id);
-        return view('orders::admin/create', compact('title', 'order', 'customer'));
+        return view('orders::admin/create', compact('title', 'order', 'customer', 'start_date', 'end_date'));
     }
 
     public function update(Request $request, $id)
